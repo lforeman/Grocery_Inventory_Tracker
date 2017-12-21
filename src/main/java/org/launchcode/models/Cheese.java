@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 public class Cheese {
-
+    //@javax.persistence.Id
     @Id
     @GeneratedValue
     private int id;
@@ -23,8 +23,6 @@ public class Cheese {
     @NotNull
     @Size(min=1, message = "Description must not be empty")
     private String description;
-
-    private CheeseType type;
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -53,11 +51,11 @@ public class Cheese {
         this.description = description;
     }
 
-    public CheeseType getType() {
-        return type;
-    }
-
-    public void setType(CheeseType type) {
-        this.type = type;
-    }
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 }
