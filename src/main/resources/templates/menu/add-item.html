@@ -12,7 +12,7 @@
         <select name="cheeseId">
             <option th:each="cheese : *{cheeses}"
                     th:text="${cheese.name}"
-                    th:value="${cheeseId}"></option>
+                    th:value="${cheese.id}"></option>
             <span th:errors="*{cheeseId}" class="error"></span>
         </select>
     </div>
