@@ -6,10 +6,10 @@ import org.launchcode.models.Menu;
 import javax.validation.constraints.NotNull;
 
 public class AddMenuItemForm {
-    @NotNull
+    //@NotNull
     private int menuId;
 
-    @NotNull
+    //@NotNull
     private int cheeseId;
 
     private Iterable<Cheese> cheeses;
