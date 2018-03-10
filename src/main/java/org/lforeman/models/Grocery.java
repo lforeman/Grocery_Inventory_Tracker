@@ -1,15 +1,14 @@
-package org.launchcode.models;
+package org.lforeman.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 /**
  * Created by LaunchCode
  */
-@Entity
-public class Cheese {
+@javax.persistence.Entity
+public class Grocery {
     //@javax.persistence.Id
     @Id
     @GeneratedValue
@@ -24,17 +23,17 @@ public class Cheese {
     private String description;
 
     @ManyToOne
-    private Category category;
+    private Storage storage;
 
-    @ManyToMany(mappedBy = "cheeses")
-    private List<Menu> menus;
+    //@ManyToMany(mappedBy = "cheeses")
+    //private List<Menu> menus;
 
-    public Cheese(String name, String description) {
+    public Grocery(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Cheese() { }
+    public Grocery() { }
 
     public int getId() {
         return id;
@@ -56,11 +55,11 @@ public class Cheese {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Storage getStorage() {
+        return storage;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setStorage(Storage storage) {
+        this.storage = storage;
     }
 }

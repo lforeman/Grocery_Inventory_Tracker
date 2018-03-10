@@ -1,7 +1,7 @@
-package org.launchcode.controllers;
+package org.lforeman.controllers;
 
-import org.launchcode.models.Category;
-import org.launchcode.models.data.CategoryDao;
+import org.lforeman.models.Storage;
+import org.lforeman.models.data.StorageDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,39 +13,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("category")
-public class CategoryController {
+@RequestMapping("storage")
+public class StorageController {
 
     @Autowired
-    private CategoryDao categoryDao;
+    private StorageDao storageDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("categories", categoryDao.findAll());
-        model.addAttribute("title", "Categories");
+        model.addAttribute("storage", storageDao.findAll());
+        model.addAttribute("title", "Storage");
 
-        return "category/index";
+        return "storage/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
 
-        model.addAttribute("title", " Add Category");
-        model.addAttribute("category", new Category());
-        return "category/add";
+        model.addAttribute("title", " Add Storage");
+        model.addAttribute("storage", new Storage());
+        return "storage/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model,
-                      @ModelAttribute @Valid Category category, Errors errors) {
+                      @ModelAttribute @Valid Storage storage, Errors errors) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Category");
-            return "category/add";
+            model.addAttribute("title", "Add Storage");
+            return "storage/add";
         }
 
-        categoryDao.save(category);
+        storageDao.save(storage);
         return "redirect:";
     }
 }

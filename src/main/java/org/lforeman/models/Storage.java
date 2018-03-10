@@ -1,4 +1,4 @@
-package org.launchcode.models;
+package org.lforeman.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-public class Category {
+public class Storage {
 
 @Id
 @GeneratedValue
@@ -19,13 +19,13 @@ private int id;
 private String name;
 
 @OneToMany
-@JoinColumn(name = "category_id")
-private List<Cheese> cheeses = new ArrayList<>();
+@JoinColumn(name = "storage_id")
+private List<Grocery> groceries = new ArrayList<>();
 
 // constructors
-public Category() { }
+public Storage() { }
 
-public Category(String name) {
+public Storage(String name) {
     this.name = name;
 }
 
@@ -37,8 +37,8 @@ public String getName() { return name; }
 public void setName(String name) {
 this.name = name;}
 
-    public List<Cheese> getCheeses() {
-        return cheeses;
+    public List<Grocery> getGroceries() {
+        return groceries;
     }
 }
 
