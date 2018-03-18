@@ -15,11 +15,11 @@ public class Grocery {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min = 3, max = 15)
     private String name;
 
     @NotNull
-    @Size(min=1, message = "Description must not be empty")
+    @Size(min = 1, message = "Description must not be empty")
     private String description;
 
     @ManyToOne
@@ -33,7 +33,8 @@ public class Grocery {
         this.description = description;
     }
 
-    public Grocery() { }
+    public Grocery() {
+    }
 
     public int getId() {
         return id;
