@@ -9,8 +9,8 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul>
-    <li th:each="category : ${categories}">
-        <p th:text="${category.name}"></p>
+    <li th:each="storage : ${storage}">
+        <p th:text="${storage.name}"></p>
     </li>
 </ul>
 <p><a href="/storage/add">Add Storage Area</a></p>

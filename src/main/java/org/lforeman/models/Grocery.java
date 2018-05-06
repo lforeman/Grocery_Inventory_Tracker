@@ -3,18 +3,16 @@ package org.lforeman.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
-/**
- * Created by LaunchCode
- */
 @javax.persistence.Entity
 public class Grocery {
-    //@javax.persistence.Id
     @Id
     @GeneratedValue
     private int id;
 
-    @NotNull
+
+    //@NotNull
     @Size(min = 3, max = 15)
     private String name;
 
@@ -25,15 +23,24 @@ public class Grocery {
     @ManyToOne
     private Storage storage;
 
-    //@ManyToMany(mappedBy = "cheeses")
-    //private List<Menu> menus;
+    private Date purchaseDate;
 
-    public Grocery(String name, String description) {
+
+    private Date expirationDate;
+
+
+    public Grocery(int id, String name, String description, Storage storage, Date purchaseDate, Date expirationDate) {
+        this.id = id;
         this.name = name;
         this.description = description;
+       // this.user = user;
+        this.storage = storage;
+        this.purchaseDate = purchaseDate;
+        this.expirationDate = expirationDate;
     }
-
-    public Grocery() {
+    public Grocery(){}
+    public Grocery(int id) {
+        this.id = id;
     }
 
     public int getId() {
@@ -62,5 +69,25 @@ public class Grocery {
 
     public void setStorage(Storage storage) {
         this.storage = storage;
+    }
+
+    public Date getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(Date purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

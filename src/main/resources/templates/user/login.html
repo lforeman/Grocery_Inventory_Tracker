@@ -4,11 +4,11 @@
 <body>
 <h1 th:text="${title}">Default Title</h1>
 
-//<div class="jumbotron text-center">
-//    <p>Login below, or click <a href="/user/add">here</a> to create a new account.</p>
-//</div>
+<div class="jumbotron text-center">
+    <p>Login below, or click <a href="/user/add">here</a> to create a new account.</p>
+</div>
 <div class="col-xs-3"></div>
-<form class="col-xs-6 text-center" method="post" th:object="${charity}">
+<form class="col-xs-6 text-center" method="post" th:object="${user}">
     <div class="form-group">
         <label th:for="username">Username</label>
         <input class="form-control" th:field="*{username}"  />

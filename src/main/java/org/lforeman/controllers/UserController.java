@@ -1,5 +1,6 @@
 package org.lforeman.controllers;
 
+import org.lforeman.models.Grocery;
 import org.lforeman.models.User;
 import org.lforeman.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,6 +59,9 @@ import java.util.List;
         public String checkLogin(Model model, @ModelAttribute User user){
             List<User> userList = userDao.findByUsername(user.getUsername());
             if(userList.get(0).getPassword().equals(user.getPassword())) {
+                List<Grocery> groceries = userList.get(0).getGroceries();
+                new ArrayList<Grocery>(groceries);
+                model.addAttribute("groceries", groceries);
                 model.addAttribute("title", "My Groceries");
                 return "grocery/index";
             }

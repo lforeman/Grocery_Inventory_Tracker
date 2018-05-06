@@ -10,19 +10,23 @@
 
 <p th:unless="${groceries} and ${groceries.size()}">no groceries :(</p>
 
-
 <table class="table">
 
     <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Storage</th>
+        <th>Purchase Date</th>
+        <th>Expiration Date</th>
     </tr>
-
     <tr th:each="grocery : ${groceries}">
         <td th:text="${grocery.name}"></td>
         <td th:text="${grocery.description}"></td>
         <td th:text="${grocery.storage.name}"></td>
+        <td th:text="${grocery.purchaseDate}"></td>
+        <td th:text="${grocery.expirationDate}"></td>
+
+
     </tr>
 
 </table>

@@ -26,6 +26,8 @@ public class GroceryController {
     StorageDao storageDao;
 
     // Request path: /grocery
+    //TODO figure out toString display
+
     @RequestMapping(value = "")
     public String index(Model model) {
 
@@ -37,18 +39,19 @@ public class GroceryController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddGroceryForm(Model model) {
-        model.addAttribute("title", "Add Grocery");
+        model.addAttribute("title", "Add Groceries");
         model.addAttribute(new Grocery());
         model.addAttribute("storage", storageDao.findAll());
         return "grocery/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddGrocerryForm(@ModelAttribute  @Valid Grocery newGrocery,
+    public String processAddGroceryForm(@ModelAttribute  @Valid Grocery newGrocery,
                                        Errors errors, @RequestParam int storageId, Model model) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Grocery");
+            model.addAttribute("title", "Add Groceries");
+            model.addAttribute(newGrocery);
             model.addAttribute("storage", storageDao.findAll());
             return "grocery/add";
         }
@@ -58,6 +61,7 @@ public class GroceryController {
         groceryDao.save(newGrocery);
         return "redirect:";
     }
+//TODO: designate user before removing
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String displayRemoveGroceryForm(Model model) {
@@ -75,6 +79,7 @@ public class GroceryController {
 
         return "redirect:";
     }
+//TODO designate user to storage
 
     @RequestMapping(value = "storage", method = RequestMethod.GET)
     public String storage(Model model, @RequestParam int id) {

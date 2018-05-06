@@ -11,14 +11,19 @@
 <body>
 
 <nav th:fragment="navigation">
-    <a href="/grocery">Home</a> |
-    <a href="/storage">Storage</a>
+    <div class="btn-group btn-group-lg">
+        <a href="/grocery" type="button" class="btn btn-primary">Home</a>
+        <a href="/storage" type="button" class="btn btn-primary">Storage</a>
+    </div>
 
 </nav>
 
 </body>
+
 <footer th:fragment="footer">
-    <a href="/grocery/add">Add</a> |
-    <a href="/grocery/remove">Remove</a>
+    <div class="btn-group btn-group-lg">
+        <a href="/grocery/add" type="button" class="btn btn-primary">Add</a>
+        <a href="/grocery/remove" type="button" class="btn btn-primary">Remove</a>
+    </div>
 </footer>
 </html>
