@@ -8,12 +8,10 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
-/*ClassLoaderFactory*
- * Created by LaunchCode
- */
+
 @Repository
 @Transactional
 public interface GroceryDao extends CrudRepository<Grocery, Integer> {
-    //List<Grocery> findByUser(User user);
+    List<Grocery> findByUser(User user);
 
 }
