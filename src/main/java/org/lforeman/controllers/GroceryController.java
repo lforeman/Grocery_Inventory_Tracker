@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -26,10 +28,9 @@ public class GroceryController {
     StorageDao storageDao;
 
     // Request path: /grocery
-    //TODO figure out toString display
-
     @RequestMapping(value = "")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request,
+                        HttpServletResponse response) {
 
         model.addAttribute("groceries", groceryDao.findAll());
         model.addAttribute("title", "My Groceries");
@@ -38,7 +39,8 @@ public class GroceryController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddGroceryForm(Model model) {
+    public String displayAddGroceryForm(Model model, HttpServletRequest request,
+                                        HttpServletResponse response) {
         model.addAttribute("title", "Add Groceries");
         model.addAttribute(new Grocery());
         model.addAttribute("storage", storageDao.findAll());
@@ -47,10 +49,11 @@ public class GroceryController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddGroceryForm(@ModelAttribute  @Valid Grocery newGrocery,
-                                       Errors errors, @RequestParam int storageId, Model model) {
+                                       Errors errors, @RequestParam int storageId, Model model, HttpServletRequest request,
+                                        HttpServletResponse response) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Groceries");
+            model.addAttribute("title", "Add Groceries error");
             model.addAttribute(newGrocery);
             model.addAttribute("storage", storageDao.findAll());
             return "grocery/add";
@@ -61,17 +64,19 @@ public class GroceryController {
         groceryDao.save(newGrocery);
         return "redirect:";
     }
-//TODO: designate user before removing
+//TODO: designate user to groceries
 
     @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveGroceryForm(Model model) {
+    public String displayRemoveGroceryForm(Model model, HttpServletRequest request,
+                                           HttpServletResponse response) {
         model.addAttribute("groceries", groceryDao.findAll());
         model.addAttribute("title", "Remove Grocery");
         return "grocery/remove";
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveGroceryForm(@RequestParam int[] groceryIds) {
+    public String processRemoveGroceryForm(@RequestParam int[] groceryIds, HttpServletRequest request,
+                                           HttpServletResponse response) {
 
         for (int id : groceryIds) {
             groceryDao.delete(id);

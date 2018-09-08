@@ -15,8 +15,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
   $( function() {
-    $( "#datepicker" ).datepicker();
-        $( "#datepicker2" ).datepicker();
+    $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+    $( "#datepicker2" ).datepicker({dateFormat: "yy-mm-dd"});
 
   } );
   </script>
@@ -27,7 +27,11 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+
 <form method="post" style="max-width:600px;" th:object="${grocery}">
+    <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+    </div>
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="*{name}" />
@@ -47,12 +51,11 @@
                     th:value="${storage.id}"></option>
         </select>
     </div>
-    <p>Purchase Date: <input type="text" id="datepicker" th:field="*{purchaseDate}"/></p>
+    <p>Purchase Date:  <input type="text" id="datepicker" th:field="*{purchaseDate}"/></p>
     <p>Expiration Date: <input type="text" id="datepicker2" th:field="*{expirationDate}"/></p>
 
     <input type="submit" value="Add Groceries" />
 </form>
-<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>

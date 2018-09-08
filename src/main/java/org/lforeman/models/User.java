@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class User {
     }
 
     @OneToMany
-    @JoinColumn
+    @JoinColumn(name = "user_id")
     private List<Grocery> groceries = new ArrayList<>();
 
     public User(String username, String email, String password) {

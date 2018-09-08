@@ -3,7 +3,7 @@ package org.lforeman.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.sql.Date;
 
 @javax.persistence.Entity
 public class Grocery {
@@ -28,12 +28,15 @@ public class Grocery {
 
     private Date expirationDate;
 
+    @ManyToOne
+    private User user;
 
-    public Grocery(int id, String name, String description, Storage storage, Date purchaseDate, Date expirationDate) {
+
+    public Grocery(int id, String name, String description, Storage storage, Date purchaseDate, Date expirationDate, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
-       // this.user = user;
+        this.user = user;
         this.storage = storage;
         this.purchaseDate = purchaseDate;
         this.expirationDate = expirationDate;
@@ -89,5 +92,13 @@ public class Grocery {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 }

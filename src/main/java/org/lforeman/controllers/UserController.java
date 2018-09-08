@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.lforeman.controllers.EmailController.sendEmails;
 
 
 @Controller
@@ -41,6 +47,12 @@ import java.util.List;
             }
             if(user.getPassword().equals(verify)){
                 userDao.save(user);
+                // testing. delete later.
+                try {
+                    sendEmails(user.getEmail());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
                 return "grocery/index";
             }
             else{
@@ -56,10 +68,15 @@ import java.util.List;
         return "user/login";
     }
         @RequestMapping(value = "login", method = RequestMethod.POST)
-        public String checkLogin(Model model, @ModelAttribute User user){
+        public String checkLogin(Model model, @ModelAttribute User user, HttpServletRequest request,
+                                 HttpServletResponse response){
             List<User> userList = userDao.findByUsername(user.getUsername());
             if(userList.get(0).getPassword().equals(user.getPassword())) {
-                List<Grocery> groceries = userList.get(0).getGroceries();
+                String username = userList.get(0).getUsername();
+                Cookie myCookie =
+                        new Cookie("name", username);
+                response.addCookie(myCookie);
+                List<Grocery> groceries = user.getGroceries();
                 new ArrayList<Grocery>(groceries);
                 model.addAttribute("groceries", groceries);
                 model.addAttribute("title", "My Groceries");
